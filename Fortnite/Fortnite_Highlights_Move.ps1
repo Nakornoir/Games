@@ -3,6 +3,11 @@
 
 param (
     [Parameter(Mandatory=$true)]
+    # Only run if FortniteClient-Win64-Shipping.exe is NOT running
+    while (Get-Process -Name "FortniteClient-Win64-Shipping" -ErrorAction SilentlyContinue) {
+        Write-Host "Fortnite is currently running. Waiting for it to close..."
+        Start-Sleep -Seconds 30
+    }
     [string]$SourceFolder,
     [int]$DaysOld = 7,
     [Parameter(Mandatory=$true)]
